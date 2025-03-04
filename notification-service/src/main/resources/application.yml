@@ -1,0 +1,38 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: notification-service
+  mail:
+    # подключение к MailHog
+    host: localhost
+    port: 1025
+    protocol: smtp
+    username:
+    password:
+      smtp:
+        starttls:
+          auth: false
+          enable: false
+    #    host: sandbox.smtp.mailtrap.io
+    #    port: 2525
+    #    username: ab2ada933ba86b
+    #    password: 75a5ace0123277
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notification-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring:
+          deserializer:
+            value:
+              delegate:
+                class: org.springframework.kafka.support.serializer.JsonDeserializer
+          json:
+            type:
+              mapping: orderEvent:com.maksKud.microservices.notification_service.order.OrderPlacedEvent
+            trusted:
+              packages: "*"

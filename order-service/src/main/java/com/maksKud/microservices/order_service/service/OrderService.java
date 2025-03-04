@@ -25,12 +25,12 @@ public class OrderService {
 
         var isProductInStock = inventoryClient.isInStock(orderRequest.skuCode(), orderRequest.quantity());
         if (isProductInStock) {
-        Order order = new Order();
-        order.setOrderNumber(UUID.randomUUID().toString());
-        order.setPrice(orderRequest.price().multiply(BigDecimal.valueOf(orderRequest.quantity())));
-        order.setSkuCode(orderRequest.skuCode());
-        order.setQuantity(orderRequest.quantity());
-        orderRepository.save(order);
+            Order order = new Order();
+            order.setOrderNumber(UUID.randomUUID().toString());
+            order.setPrice(orderRequest.price().multiply(BigDecimal.valueOf(orderRequest.quantity())));
+            order.setSkuCode(orderRequest.skuCode());
+            order.setQuantity(orderRequest.quantity());
+            orderRepository.save(order);
 
             // Send the message to Kafka Topic
             OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent();

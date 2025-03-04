@@ -103,3 +103,11 @@ services:
       KAFKA_CLUSTERS_BOOTSTRAPSERVERS: broker:29092
       #      KAFKA_CLUSTERS_SCHEMAREGISTRY: http://schema-registry:8081
       DYNAMIC_CONFIG_ENABLED: 'true'
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    ports:
+      - "1025:1025"  # SMTP порт для отправки писем
+      - "8025:8025"  # Веб-интерфейс для просмотра писем
+    restart: always

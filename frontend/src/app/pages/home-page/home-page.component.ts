@@ -63,7 +63,7 @@ export class HomePageComponent implements OnInit {
         this.quantityIsNull = true;
       } else {
         const order: Order = {
-          skuCode: product.skuCode,
+          skuCode: product.name,
           price: product.price,
           quantity: Number(quantity),
           userDetails: userDetails
