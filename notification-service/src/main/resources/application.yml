@@ -12,8 +12,8 @@ spring:
     username:
     password:
       smtp:
+        auth: false
         starttls:
-          auth: false
           enable: false
     #    host: sandbox.smtp.mailtrap.io
     #    port: 2525
@@ -24,15 +24,42 @@ spring:
     consumer:
       group-id: notification-service
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
       properties:
-        spring:
-          deserializer:
-            value:
-              delegate:
-                class: org.springframework.kafka.support.serializer.JsonDeserializer
-          json:
-            type:
-              mapping: orderEvent:com.maksKud.microservices.notification_service.order.OrderPlacedEvent
-            trusted:
-              packages: "*"
+        specific:
+          avro:
+            reader: true
+        schema:
+          registry:
+            url: http://127.0.0.1:8085
+#        spring:
+#          deserializer:
+#            value:
+#              delegate:
+#                class: org.springframework.kafka.support.serializer.JsonDeserializer
+#          json:
+#            type:
+#              mapping: orderEvent:com.maksKud.microservices.notification_service.order.OrderPlacedEventDeprecated
+#            trusted:
+#              packages: "*"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  observations:
+    key-values:
+      application: notification-service
+  tracing:
+    sampling:
+      probability: 1.0
+# Loki URL
+loki:
+  url: http://localhost:3100/loki/api/v1/push

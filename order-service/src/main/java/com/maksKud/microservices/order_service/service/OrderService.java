@@ -33,14 +33,14 @@ public class OrderService {
             orderRepository.save(order);
 
             // Send the message to Kafka Topic
-            OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent();
-            orderPlacedEvent.setOrderNumber(order.getOrderNumber());
-            orderPlacedEvent.setEmail(orderRequest.userDetails().email());
-//            orderPlacedEvent.setFirstName(orderRequest.userDetails().firstName());
-//            orderPlacedEvent.setLastName(orderRequest.userDetails().lastName());
-            log.info("Start - Sending OrderPlacedEvent {} to Kafka topic order-placed", orderPlacedEvent);
-            kafkaTemplate.send("order-placed", orderPlacedEvent);
-            log.info("End - Sending OrderPlacedEvent {} to Kafka topic order-placed", orderPlacedEvent);
+            OrderPlacedEvent orderPlacedEventDeprecated = new OrderPlacedEvent();
+            orderPlacedEventDeprecated.setOrderNumber(order.getOrderNumber());
+            orderPlacedEventDeprecated.setEmail(orderRequest.userDetails().email());
+            orderPlacedEventDeprecated.setFirstName(orderRequest.userDetails().firstName());
+            orderPlacedEventDeprecated.setLastName(orderRequest.userDetails().lastName());
+            log.info("Start - Sending OrderPlacedEventDeprecated {} to Kafka topic order-placed", orderPlacedEventDeprecated);
+            kafkaTemplate.send("order-placed", orderPlacedEventDeprecated);
+            log.info("End - Sending OrderPlacedEventDeprecated {} to Kafka topic order-placed", orderPlacedEventDeprecated);
         } else {
             throw new RuntimeException("Product with SkuCode " + orderRequest.skuCode() + " is not in stock");
         }
