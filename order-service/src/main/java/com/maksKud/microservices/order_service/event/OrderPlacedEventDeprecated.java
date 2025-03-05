@@ -1,4 +1,4 @@
-package com.maksKud.microservices.notification_service.order;
+package com.maksKud.microservices.order_service.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class OrderPlacedEvent {
+@Deprecated
+public class OrderPlacedEventDeprecated {
     private String orderNumber;
     private String email;
 }
