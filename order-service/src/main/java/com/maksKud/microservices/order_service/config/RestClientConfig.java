@@ -1,6 +1,7 @@
 package com.maksKud.microservices.order_service.config;
 
 import com.maksKud.microservices.order_service.client.InventoryClient;
+import io.micrometer.observation.ObservationRegistry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,13 +20,15 @@ public class RestClientConfig {
 
     @Value("${inventory.url}")
     private String inventoryServiceUrl;
+    private final ObservationRegistry observationRegistry;
 
     @Bean
+
     public InventoryClient inventoryClient() {
         RestClient restClient = RestClient.builder()
                 .baseUrl(inventoryServiceUrl)
                 .requestFactory(getClientRequestFactory())
-//                .observationRegistry(observationRegistry)
+                .observationRegistry(observationRegistry)
                 .build();
         var restClientAdapter = RestClientAdapter.create(restClient);
         var httpServiceProxyFactory = HttpServiceProxyFactory.builderFor(restClientAdapter).build();

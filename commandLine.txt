@@ -1,0 +1,129 @@
+создай аккаунт в docker hub
+после чего создай новый токен в personal-access-tokens
+
+авторизуйся в докер в командной строке
+docker login -u твойЛогин
+пароль от твоего нового токена
+
+после чего добавь image себе в локальный репозиторий hub.docker
+makskud- мой логин в hub.docker
+docker build -t frontend .
+docker tag frontend:latest makskud/frontend:latest
+docker push makskud/frontend:latest
+
+сборка image-й
+mvn spring-boot:build-image  -DskipTests  -DdockerPassword=пораль от нового токена
+
+После чего установи kubectl и Kind
+https://github.com/thiagousa/youtube/blob/3dcc806cf47d268011ed8615b0909ac4e8d35ffa/3/README.md
+
+установка kubectl и Kind
+Id CommandLine
+  -- -----------
+   1 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.Servi...
+   2 choco install minikube
+   3 kubecrl version --client
+   4 curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.27.0/kind-windows-amd64...
+   5 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.Servi...
+   6 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex (...
+   7 Set-ExecutionPolicy Bypass -Scope Process -Force
+   8 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex (...
+   9 choco --version
+  10 choco install kind
+  11 choco install kubernetes-cli
+  12 kubectl version --client
+  13 kubectl get nodes
+  14 kind create cluster
+  15 kind --version
+  16 mkdir c:/kind
+  17 Move-Item .\kind-windows-amd64.exe c:\kind\kind.exe
+  18 kind
+  19 kind create cluster
+  20 kind create cluster
+  21 kubectl cluster-info
+  22 kubectl run nginx --image=nginx:latest
+  23 kubectl get pod
+
+Распакоука
+   Id CommandLine
+    -- -----------
+     1 cd k8s
+     2 cd kind
+     8 ./create-kind-cluster.sh
+     9 kubectl get all
+    10 cd
+    11 cd k8s
+    12 cd kind
+    14 cd k8s
+    15 cd ..
+    16 cd manifests
+    18 kubectl apply -f postgres.yaml
+    19 cd infrastructure
+    20 kubectl apply -f postgres.yaml
+    21 kubectl get all
+    22 kubectl get secrets
+    23 kubectl get pvcs
+    24 kubectl get pvc
+    25 kubectl get pv
+    26 kubectl get pods
+    27 kubectl logs -f postgres-f84b8477b-ft4qc
+    29 kubectl get svc
+    33 kubectl port-forward svc/postgres 5432:5432
+
+    37 cd ..
+    38 cd frontend
+    39 docker login -u makskud
+    40 docker login -u makskud
+    41 docker login -u makskud
+    42 docker build -t frontend .
+    43 docker tag frontend:latest makskud/frontend:latest
+    44 docker push makskud/frontend:latest
+    45 cd ..
+    46 cd manifests
+    47 cd k8s
+    48 cd manifests
+    49 kubectl apply -f infrastructure
+    50 kubectl get pods
+    51 kubectl get pods
+    52 kubectl get service
+    53 kubectl port-forward svc/postgres 8080:8080
+
+1 kubectl get pods
+   2 kubectl get service
+   4 cd manifests
+   5 cd k8s/manifests
+   7 kubectl apply -f applications
+   8 kubectl get pods
+  11 kubectl logs -f api-gateway-6b4f84665d-wnjgr
+  12 kubectl get svc
+  13 kubectl port-forward svc/api-gateway 9000:9000
+  14 kubectl port-forward svc/frontend 4200:4200
+  15 kubectl port-forward svc/frontend 4200:4200
+  16 kubectl port-forward svc/frontend 8080:8080
+  17 kubectl port-forward svc/frontend 8080:80
+  21 kubectl port-forward svc/frontend 8084:8084
+  22 kubectl port-forward svc/frontend 4200:80
+  23 cd ..
+  25 cd frontend
+  26 docker build -t frontend .
+  27 docker tag frontend:latest makskud/frontend:latest
+  28 docker push makskud/frontend:latest
+  30 cd k8s
+  31 cd manifests/applications
+  32 kubectl delete -f frontend.yml
+  33 kubectl apply -f frontend.yml
+  34 kubectl get pods
+  35 kubectl port-forward svc/frontend 4200:80
+  36 kubectl port-forward svc/frontend 4200:80
+  44 cd k8s
+  45 cd manifests/applications
+  46 kubectl delete -f frontend.yml
+  47 kubectl apply -f frontend.yml
+  48 kubectl get pods
+  49 kubectl port-forward svc/frontend 4200:80
+  50 kubectl get pods
+  51 kubectl rollout restart deployment/order-service
+  52 kubectl get pods
+  53 kubectl rollout restart deployment/inventory-service
+  54 kubectl get pods
+  57 kubectl logs -f order-service-66678786bc-8tnmn
