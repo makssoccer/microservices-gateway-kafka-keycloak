@@ -56,15 +56,13 @@ Id CommandLine
     12 cd kind
     14 cd k8s
     15 cd ..
-    16 cd manifests
-    18 kubectl apply -f postgres.yaml
     19 cd infrastructure
     20 kubectl apply -f postgres.yaml
     21 kubectl get all
     22 kubectl get secrets
     23 kubectl get pvcs
     24 kubectl get pvc
-    25 kubectl get pv
+    25 kubectl get pvt
     26 kubectl get pods
     27 kubectl logs -f postgres-f84b8477b-ft4qc
     29 kubectl get svc
@@ -127,3 +125,10 @@ Id CommandLine
   53 kubectl rollout restart deployment/inventory-service
   54 kubectl get pods
   57 kubectl logs -f order-service-66678786bc-8tnmn
+
+
+kind load docker-image -n microservices makskud/order-service:0.0.5-SNAPSHOT
+
+kubectl edit deployment api-gateway
+
+docker exec -it microservices-control-plane bash

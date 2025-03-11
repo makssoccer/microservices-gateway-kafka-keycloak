@@ -49,4 +49,4 @@ kind: ConfigMap
 metadata:
   name: inventory-service-config
 data:
-  SPRING_DATASOURCE_URL: "jdbc:postgresql://localhost:5432/inventory-service"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://localhost:5432/inventory_service"

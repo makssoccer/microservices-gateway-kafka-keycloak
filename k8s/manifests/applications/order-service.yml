@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: makskud/order-service:0.0.1-SNAPSHOT
+          image: makskud/order-service:0.0.5-SNAPSHOT
           env:
             - name: SPRING_KAFKA_BOOTSTRAP-SERVERS
               valueFrom:
@@ -64,5 +64,5 @@ kind: ConfigMap
 metadata:
   name: order-service-config
 data:
-  SPRING_DATASOURCE_URL: "jdbc:postgresql://localhost:5432/order-service"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://localhost:5432/order_service"
   SPRING_KAFKA_PRODUCER_PROPERTIES_SCHEMA_REGISTRY_URL: "http://schema-registry.default.svc.cluster.local:8081"
