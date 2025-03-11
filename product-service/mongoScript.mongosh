@@ -1,0 +1,129 @@
+//mongosh
+
+show dbs
+
+show collections
+
+db.product.insertOne({name: 'One Plus 10' , price: 450, description: 'never settle' })
+
+db.product.insertOne({
+    name: 'xiaomi', price: 300, description: {
+        ios : 'bad',
+        version: 'global'
+    }
+})
+
+db.product.insertMany([
+    { name: 'iPhone 13', price: 999, description: 'The previous iPhone' },
+    { name: 'Samsung Galaxy S21', price: 799, description: 'Flagship Android phone' }
+])
+
+db.product.find()
+
+db.product.find().limit(3).skip(1)
+
+db.product.find({ price: { $gt: 600 } })// больше
+
+db.product.find({ price: { $lt: 600 } })// меньше
+
+db.product.find({ price: { $in: [500, 899] } })
+
+db.product.find({$or: [{price: {$in: [500, 899]}}, {name: 'iPhone 13' }] })
+
+db.product.find({name: {$not: {$eq:'iPhone 13'} } })
+
+db.product.find({price: {$gte: 800, $lte: 1000}})// от и до
+
+db.product.find({ name: 'One Plus 10' })
+
+db.product.findOne({ name: 'One Plus 10' })
+
+db.product.find({ name: /^One/ })
+
+db.product.find({'description.ios': 'bad'})
+
+db.product.find({_class: {$exists: false}})
+
+db.product.updateOne(
+    { name: 'One Plus 10' }, // Условие поиска
+    { $set: { price: 500 } } // Новые значения
+)
+
+db.product.countDocuments()
+
+db.product.updateMany(
+    { price: { $gt: 700 } }, // Условие поиска
+    { $inc: { price: 50 } }  // Увеличение цены на 50
+)
+
+db.product.deleteMany({ name: 'Iphone 15' })
+
+db.product.createIndex({name : 1})
+
+db.product.dropIndex({name : 1})
+
+db.product.insertMany([
+    {
+        name: "iPhone 13",
+        price: 999,
+        description: "The latest iPhone with A15 Bionic chip",
+        brand: "Apple"
+    },
+    {
+        name: "Samsung Galaxy S21",
+        price: 799,
+        description: "Flagship Android phone with Exynos 2100",
+        brand: "Samsung"
+    },
+    {
+        name: "Google Pixel 6",
+        price: 699,
+        description: "Pure Android experience with Tensor chip",
+        brand: "Google"
+    },
+    {
+        name: "OnePlus 9 Pro",
+        price: 899,
+        description: "Flagship killer with Hasselblad camera",
+        brand: "OnePlus"
+    },
+    {
+        name: "Xiaomi Mi 11",
+        price: 749,
+        description: "Affordable flagship with Snapdragon 888",
+        brand: "Xiaomi"
+    },
+    {
+        name: "Sony Xperia 1 III",
+        price: 1299,
+        description: "4K OLED display with professional-grade camera",
+        brand: "Sony"
+    },
+    {
+        name: "Huawei P50 Pro",
+        price: 1199,
+        description: "Leica camera with HarmonyOS",
+        brand: "Huawei"
+    },
+    {
+        name: "Oppo Find X3 Pro",
+        price: 1099,
+        description: "10-bit color display with Snapdragon 888",
+        brand: "Oppo"
+    },
+    {
+        name: "Asus ROG Phone 5",
+        price: 999,
+        description: "Gaming phone with 144Hz AMOLED display",
+        brand: "Asus"
+    },
+    {
+        name: "Nokia XR20",
+        price: 499,
+        description: "Rugged smartphone with 5G support",
+        brand: "Nokia"
+    }
+])
+
+
+

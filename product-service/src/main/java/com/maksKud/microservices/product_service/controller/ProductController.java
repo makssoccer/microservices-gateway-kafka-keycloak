@@ -6,6 +6,7 @@ import com.maksKud.microservices.product_service.sevice.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,5 +32,11 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     public List<ProductResponse> getAllProducts() {
         return productService.getAllProducts();
+    }
+
+    @GetMapping(value = "/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductResponse> getProduct(@PathVariable String name) {
+        return productService.getProductsForName(name);
     }
 }

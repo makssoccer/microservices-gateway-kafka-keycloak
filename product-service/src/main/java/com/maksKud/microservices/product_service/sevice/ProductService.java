@@ -20,18 +20,29 @@ public class ProductService {
         Product product = Product.builder()
                 .name(productRequest.name())
                 .price(productRequest.price())
+                .brand(productRequest.brand())
                 .description(productRequest.description())
                 .build();
         productRepository.save(product);
 
         log.info("Product created: {}", product);
-        return new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice());
+        return new ProductResponse(product.getId(), product.getName(),
+                product.getBrand(), product.getDescription(), product.getPrice());
     }
 
     public List<ProductResponse> getAllProducts() {
         return productRepository.findAll()
                 .stream()
-                .map(product -> new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice()))
+                .map(product -> new ProductResponse(product.getId(), product.getName(),
+                        product.getBrand(), product.getDescription(), product.getPrice()))
+                .toList();
+    }
+
+    public List<ProductResponse> getProductsForName(String name) {
+        return productRepository.findProductsByNameLike(name)
+                .stream()
+                .map(product -> new ProductResponse(product.getId(), product.getName(),
+                        product.getBrand(), product.getDescription(), product.getPrice()))
                 .toList();
     }
 }
